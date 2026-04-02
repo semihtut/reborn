@@ -13,6 +13,7 @@ export function HydrationTracker() {
     loadTodayHydration();
   }, []);
 
+  /* Load today's water intake from IndexedDB */
   async function loadTodayHydration() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -24,6 +25,7 @@ export function HydrationTracker() {
     setTodayMl(total);
   }
 
+  /* Record water intake */
   async function addWater(ml: number) {
     await db.hydration.add({
       sessionId: null,
@@ -34,54 +36,67 @@ export function HydrationTracker() {
   }
 
   return (
-    <div className="w-full bg-slate-900 rounded-2xl p-4">
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="font-semibold text-sky-400">Su Takibi</h3>
-        <span className="text-sm text-slate-400">
+    <div className="w-full glass-card rounded-2xl p-5">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-sm font-light tracking-wider uppercase text-electric/80">
+          Su Takibi
+        </h3>
+        <span className="text-[11px] font-light tracking-wide text-slate-text">
           {todayMl}ml / {WATER_GOAL_ML}ml
         </span>
       </div>
 
-      {/* Progress bar */}
-      <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden mb-3">
+      {/* Progress bar with glow */}
+      <div className="w-full h-1.5 bg-obsidian-border rounded-full overflow-hidden mb-4">
         <div
-          className="h-full bg-sky-500 rounded-full transition-all duration-500"
-          style={{ width: `${progress}%` }}
+          className="h-full rounded-full transition-all duration-500"
+          style={{
+            width: `${progress}%`,
+            background: "linear-gradient(90deg, #0070cc, #00a0ff)",
+            boxShadow: "0 0 12px rgba(0, 160, 255, 0.3)",
+          }}
         />
       </div>
 
-      {/* Glass indicators */}
-      <div className="flex gap-1 mb-3">
+      {/* LED-style glass indicators */}
+      <div className="flex gap-1.5 mb-4">
         {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
-            className={`flex-1 h-2 rounded-full ${
-              i < glasses ? "bg-sky-500" : "bg-slate-800"
+            className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${
+              i < glasses
+                ? ""
+                : "bg-obsidian-border"
             }`}
+            style={
+              i < glasses
+                ? {
+                    background: "#00a0ff",
+                    boxShadow: "0 0 6px rgba(0, 160, 255, 0.4)",
+                    opacity: 0.7 + (i / 10) * 0.3,
+                  }
+                : undefined
+            }
           />
         ))}
       </div>
 
       {/* Quick add buttons */}
       <div className="flex gap-2">
-        <button
-          onClick={() => addWater(WATER_GLASS_ML)}
-          className="flex-1 bg-sky-600/20 hover:bg-sky-600/30 active:bg-sky-600/40 text-sky-400 rounded-xl py-2.5 text-sm font-medium transition-colors"
-        >
-          +1 Bardak
-        </button>
-        <button
-          onClick={() => addWater(WATER_GLASS_ML * 2)}
-          className="flex-1 bg-sky-600/20 hover:bg-sky-600/30 active:bg-sky-600/40 text-sky-400 rounded-xl py-2.5 text-sm font-medium transition-colors"
-        >
-          +2 Bardak
-        </button>
-        <button
-          onClick={() => addWater(500)}
-          className="flex-1 bg-sky-600/20 hover:bg-sky-600/30 active:bg-sky-600/40 text-sky-400 rounded-xl py-2.5 text-sm font-medium transition-colors"
-        >
-          +500ml
-        </button>
+        {[
+          { label: "+1 Bardak", ml: WATER_GLASS_ML },
+          { label: "+2 Bardak", ml: WATER_GLASS_ML * 2 },
+          { label: "+500ml", ml: 500 },
+        ].map((btn) => (
+          <button
+            key={btn.label}
+            onClick={() => addWater(btn.ml)}
+            className="flex-1 py-2.5 rounded-xl text-[11px] font-light tracking-wider uppercase transition-all border border-electric/10 text-electric/60 hover:border-electric/25 hover:text-electric/80 hover:bg-electric/5 active:bg-electric/10"
+          >
+            {btn.label}
+          </button>
+        ))}
       </div>
     </div>
   );

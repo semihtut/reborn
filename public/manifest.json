@@ -4,8 +4,8 @@
   "description": "Su orucu takip uygulaması — oruç süreni, su tüketimini ve sağlık metriklerini takip et",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0ea5e9",
+  "background_color": "#08090e",
+  "theme_color": "#08090e",
   "orientation": "portrait",
   "icons": [
     {

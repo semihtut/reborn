@@ -31,7 +31,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <DisclaimerModal />
-      <main className="max-w-md mx-auto px-4 pt-6 pb-24">
+      <main className="max-w-md mx-auto px-5 pt-8 pb-28">
         {children}
       </main>
       <BottomNav />

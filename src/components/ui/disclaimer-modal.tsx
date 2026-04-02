@@ -15,6 +15,7 @@ export function DisclaimerModal() {
     }
   }, []);
 
+  /* Accept disclaimer and persist to localStorage */
   function accept() {
     localStorage.setItem(DISCLAIMER_KEY, "true");
     setShow(false);
@@ -23,19 +24,23 @@ export function DisclaimerModal() {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6">
-        <h2 className="text-xl font-bold text-red-400 mb-4">Dikkat! Uygunluk Kontrolü</h2>
+    <div className="fixed inset-0 bg-obsidian/90 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
+      <div className="glass-card border-obsidian-border rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6">
+        <h2 className="text-lg font-light tracking-wider uppercase text-red-400/80 mb-5">
+          Dikkat! Uygunluk Kontrolü
+        </h2>
 
-        <p className="text-sm text-slate-300 mb-4">{MEDICAL_DISCLAIMER}</p>
+        <p className="text-[13px] font-extralight text-white/50 mb-5 leading-relaxed">
+          {MEDICAL_DISCLAIMER}
+        </p>
 
-        <h3 className="text-sm font-semibold text-slate-200 mb-2">
+        <h3 className="text-[11px] font-light tracking-wider uppercase text-white/40 mb-3">
           Kimler oruç tutMAMALI:
         </h3>
-        <ul className="text-sm text-slate-400 space-y-1 mb-6">
+        <ul className="text-[12px] font-extralight text-white/40 space-y-2 mb-6 leading-relaxed">
           {FASTING_CONTRAINDICATIONS.map((item) => (
-            <li key={item} className="flex gap-2">
-              <span className="text-red-400">•</span>
+            <li key={item} className="flex gap-3">
+              <span className="text-red-400/40 mt-0.5">•</span>
               {item}
             </li>
           ))}
@@ -43,7 +48,7 @@ export function DisclaimerModal() {
 
         <button
           onClick={accept}
-          className="w-full bg-sky-600 hover:bg-sky-700 active:bg-sky-800 rounded-xl py-3 font-semibold transition-colors"
+          className="w-full py-4 rounded-2xl font-light text-[13px] tracking-wider uppercase transition-all border border-electric/20 text-electric/80 hover:bg-electric/5 hover:border-electric/30 active:bg-electric/10"
         >
           Ben bunlardan değilim, devam
         </button>

@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { db } from "@/lib/db";
 import type { FastingStats } from "@/types/fasting";
 
+/* Single stat card with premium glassmorphism */
 function StatCard({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="bg-slate-900 rounded-2xl p-4 text-center">
-      <p className="text-2xl font-bold text-sky-400">{value}</p>
-      <p className="text-sm text-slate-300 mt-1">{label}</p>
-      {sub && <p className="text-xs text-slate-500 mt-0.5">{sub}</p>}
+    <div className="glass-card rounded-2xl p-4 text-center">
+      <p className="text-2xl font-extralight tracking-wider text-electric">{value}</p>
+      <p className="text-[12px] font-light tracking-wider text-white/60 mt-1.5 uppercase">{label}</p>
+      {sub && <p className="text-[10px] font-light text-slate-text/50 mt-1 tracking-wide">{sub}</p>}
     </div>
   );
 }
@@ -28,6 +29,7 @@ export default function StatsPage() {
     computeStats();
   }, []);
 
+  /* Calculate all stats from IndexedDB sessions */
   async function computeStats() {
     const sessions = await db.sessions.toArray();
     const completed = sessions.filter((s) => s.status === "completed");
@@ -53,7 +55,6 @@ export default function StatsPage() {
     const longest = Math.max(...durations);
     const avg = totalHours / durations.length;
 
-    // Streak: count consecutive completed fasts (sorted by date, most recent first)
     const sorted = [...completed].sort(
       (a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
     );
@@ -80,13 +81,15 @@ export default function StatsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <h1 className="text-2xl font-bold text-sky-400">İstatistikler</h1>
+    <div className="flex flex-col gap-5 w-full">
+      <h1 className="text-2xl font-extralight tracking-ultra-wide uppercase text-white/90 glow-text">
+        İstatistikler
+      </h1>
 
       {stats.totalFasts === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-slate-500 text-lg">Henüz veri yok</p>
-          <p className="text-slate-600 text-sm mt-1">
+        <div className="text-center py-16">
+          <p className="text-slate-text text-base font-light">Henüz veri yok</p>
+          <p className="text-slate-text/50 text-[12px] font-light mt-2 tracking-wide">
             İlk orucunu tamamladığında istatistikler burada görünecek
           </p>
         </div>
