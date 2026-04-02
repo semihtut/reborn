@@ -3,6 +3,11 @@
 import { create } from "zustand";
 import type { FastingSession } from "@/types/fasting";
 import { db } from "@/lib/db";
+import {
+  startFastingNotifications,
+  stopFastingNotifications,
+  requestNotificationPermission,
+} from "@/lib/notifications";
 
 interface FastingStore {
   currentSession: FastingSession | null;
@@ -23,7 +28,6 @@ export const useFastingStore = create<FastingStore>((set, get) => ({
 
   init: async () => {
     if (get().initialized) return;
-    // Restore active session from DB
     const active = await db.sessions
       .where("status")
       .equals("active")
@@ -38,6 +42,8 @@ export const useFastingStore = create<FastingStore>((set, get) => ({
         elapsedSeconds: elapsed,
         initialized: true,
       });
+      // Resume notifications for active session
+      startFastingNotifications(active.startTime, active.targetHours);
     } else {
       set({ initialized: true });
     }
@@ -57,6 +63,9 @@ export const useFastingStore = create<FastingStore>((set, get) => ({
       isRunning: true,
       elapsedSeconds: 0,
     });
+    // Start notifications
+    await requestNotificationPermission();
+    startFastingNotifications(session.startTime, targetHours);
   },
 
   stopFasting: async () => {
@@ -72,6 +81,7 @@ export const useFastingStore = create<FastingStore>((set, get) => ({
       isRunning: false,
       elapsedSeconds: 0,
     });
+    stopFastingNotifications();
   },
 
   tick: () => {
