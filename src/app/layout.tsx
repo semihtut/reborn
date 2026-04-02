@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AppShell } from "@/components/ui/app-shell";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -43,7 +44,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} font-sans antialiased bg-slate-950 text-white min-h-screen`}
       >
-        {children}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

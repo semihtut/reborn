@@ -2,23 +2,48 @@
 
 import { create } from "zustand";
 import type { FastingSession } from "@/types/fasting";
+import { db } from "@/lib/db";
 
 interface FastingStore {
   currentSession: FastingSession | null;
   isRunning: boolean;
   elapsedSeconds: number;
-  startFasting: (targetHours: number) => void;
-  stopFasting: () => void;
+  initialized: boolean;
+  init: () => Promise<void>;
+  startFasting: (targetHours: number) => Promise<void>;
+  stopFasting: () => Promise<void>;
   tick: () => void;
-  setCurrentSession: (session: FastingSession | null) => void;
 }
 
 export const useFastingStore = create<FastingStore>((set, get) => ({
   currentSession: null,
   isRunning: false,
   elapsedSeconds: 0,
+  initialized: false,
 
-  startFasting: (targetHours: number) => {
+  init: async () => {
+    if (get().initialized) return;
+    // Restore active session from DB
+    const active = await db.sessions
+      .where("status")
+      .equals("active")
+      .last();
+    if (active) {
+      const elapsed = Math.floor(
+        (Date.now() - new Date(active.startTime).getTime()) / 1000
+      );
+      set({
+        currentSession: active,
+        isRunning: true,
+        elapsedSeconds: elapsed,
+        initialized: true,
+      });
+    } else {
+      set({ initialized: true });
+    }
+  },
+
+  startFasting: async (targetHours: number) => {
     const session: FastingSession = {
       startTime: new Date(),
       endTime: null,
@@ -26,17 +51,27 @@ export const useFastingStore = create<FastingStore>((set, get) => ({
       status: "active",
       notes: "",
     };
-    set({ currentSession: session, isRunning: true, elapsedSeconds: 0 });
+    const id = await db.sessions.add(session);
+    set({
+      currentSession: { ...session, id },
+      isRunning: true,
+      elapsedSeconds: 0,
+    });
   },
 
-  stopFasting: () => {
+  stopFasting: async () => {
     const { currentSession } = get();
-    if (currentSession) {
-      set({
-        currentSession: { ...currentSession, endTime: new Date(), status: "completed" },
-        isRunning: false,
-      });
-    }
+    if (!currentSession?.id) return;
+    const endTime = new Date();
+    await db.sessions.update(currentSession.id, {
+      endTime,
+      status: "completed",
+    });
+    set({
+      currentSession: null,
+      isRunning: false,
+      elapsedSeconds: 0,
+    });
   },
 
   tick: () => {
@@ -47,15 +82,5 @@ export const useFastingStore = create<FastingStore>((set, get) => ({
       );
       set({ elapsedSeconds: elapsed });
     }
-  },
-
-  setCurrentSession: (session) => {
-    set({
-      currentSession: session,
-      isRunning: session?.status === "active",
-      elapsedSeconds: session
-        ? Math.floor((Date.now() - new Date(session.startTime).getTime()) / 1000)
-        : 0,
-    });
   },
 }));

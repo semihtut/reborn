@@ -11,7 +11,7 @@ export type FastingStatus = "active" | "completed" | "cancelled";
 
 export interface HydrationEntry {
   id?: number;
-  sessionId: number;
+  sessionId: number | null;
   timestamp: Date;
   amountMl: number;
 }
@@ -22,4 +22,18 @@ export interface FastingStats {
   longestFastHours: number;
   currentStreak: number;
   averageDurationHours: number;
+  totalHoursFasted: number;
+}
+
+export interface MilestoneReached {
+  hours: number;
+  title: string;
+  message: string;
+  reachedAt: Date;
+}
+
+export interface DailyHydration {
+  date: string;
+  totalMl: number;
+  entries: number;
 }
