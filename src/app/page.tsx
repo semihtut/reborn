@@ -17,8 +17,8 @@ export default function Home() {
     <div className="flex flex-col items-center gap-8 w-full bg-obsidian-gradient min-h-[calc(100vh-6rem)]">
       {/* Premium header */}
       <div className="text-center pt-2">
-        <h1 className="text-2xl font-extralight tracking-ultra-wide uppercase text-white/90 glow-text">
-          Water Fasting
+        <h1 className="text-2xl font-extralight tracking-ultra-wide text-white/90 glow-text">
+          WATER FASTING
         </h1>
         <div className="mt-1.5 h-px w-16 mx-auto bg-gradient-to-r from-transparent via-electric/40 to-transparent" />
       </div>
