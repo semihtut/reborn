@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useFastingStore } from "@/stores/fasting-store";
 import { FastingTimer } from "@/components/fasting/fasting-timer";
-import { PresetSelector } from "@/components/fasting/preset-selector";
+import { StartFast } from "@/components/fasting/start-fast";
 import { HydrationTracker } from "@/components/fasting/hydration-tracker";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
     <div className="flex flex-col items-center gap-6 w-full">
       <h1 className="text-2xl font-bold text-sky-400">Water Fasting</h1>
 
-      {isRunning ? <FastingTimer /> : <PresetSelector />}
+      {isRunning ? <FastingTimer /> : <StartFast />}
 
       <HydrationTracker />
     </div>

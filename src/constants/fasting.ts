@@ -1,3 +1,6 @@
+// Fixed 72-hour water fast
+export const FAST_DURATION_HOURS = 72;
+
 // 6-phase fasting system based on scientific research
 export const FASTING_PHASES = [
   {
@@ -58,17 +61,6 @@ export const FASTING_PHASES = [
 
 export type FastingPhaseId = (typeof FASTING_PHASES)[number]["id"];
 
-// Fasting presets
-export const FASTING_PRESETS = [
-  { label: "16:8", hours: 16, description: "Intermittent fasting — başlangıç" },
-  { label: "18:6", hours: 18, description: "Otofaji başlangıcı" },
-  { label: "20:4", hours: 20, description: "Warrior diet" },
-  { label: "OMAD", hours: 24, description: "Günde tek öğün — derin ketoz" },
-  { label: "36 Saat", hours: 36, description: "Uzatılmış oruç" },
-  { label: "48 Saat", hours: 48, description: "Bağışıklık yenilenmesi" },
-  { label: "72 Saat", hours: 72, description: "Tam yenilenme — doktor kontrolünde" },
-] as const;
-
 // Milestone messages shown at specific hours
 export const MILESTONE_MESSAGES = [
   { hours: 4, title: "Sindirim Tamamlandı", message: "Vücudun enerji kaynağını değiştirmeye hazırlanıyor." },
@@ -89,7 +81,6 @@ export const MILESTONE_MESSAGES = [
 // Water tracking
 export const WATER_GOAL_ML = 2500;
 export const WATER_GLASS_ML = 250;
-export const WATER_REMINDERS_HOURS = [2, 4, 6, 8, 10, 12] as const;
 
 // Medical disclaimer
 export const MEDICAL_DISCLAIMER =
