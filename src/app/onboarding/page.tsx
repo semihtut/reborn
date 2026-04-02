@@ -9,8 +9,8 @@ const SLIDES = [
   {
     emoji: "💧",
     title: "Hoş geldin!",
-    subtitle: "Leo & Hasan'ın 72 Saatlik Su Orucu Macerasına",
-    body: "Bu uygulama sadece ikiniz için yapıldı. 72 saatlik su orucunda vücudunuzda neler olduğunu saat saat takip edeceksiniz.",
+    subtitle: "Leo, Hasan & Samet'in 72 Saatlik Su Orucu Macerasına",
+    body: "Bu uygulama sadece üçünüz için yapıldı. 72 saatlik su orucunda vücudunuzda neler olduğunu saat saat takip edeceksiniz.",
     bg: "from-sky-950 to-slate-950",
   },
   {
@@ -31,7 +31,7 @@ const SLIDES = [
     emoji: "💪",
     title: "Birlikte Daha Güçlü",
     subtitle: "Su Takibi + Saat Saat Bilgi",
-    body: "Su tüketimini takip edin, milestone'larda bildirim alın ve birbirinizi motive edin. 72 saat — yapabilirsiniz!",
+    body: "Su tüketimini takip edin, milestone'larda bildirim alın ve birbirinizi motive edin. Üçünüz birlikte — 72 saat yapabilirsiniz!",
     bg: "from-green-950 to-slate-950",
   },
 ];
