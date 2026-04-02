@@ -84,17 +84,22 @@ export const WATER_GLASS_ML = 250;
 
 // Medical disclaimer
 export const MEDICAL_DISCLAIMER =
-  "Bu uygulama yalnızca bilgilendirme amaçlıdır ve tıbbi tavsiye yerine geçmez. Herhangi bir oruç programına başlamadan önce doktorunuza danışın. Özellikle mevcut sağlık sorunlarınız varsa veya ilaç kullanıyorsanız, mutlaka tıbbi onay alın.";
+  "Bu uygulamayı kullanabilmen için aşağıdaki şartları sağlaman gerekir. Aksi takdirde 72 saat oruç tutmak yerine 72 saat aim practice yapmanı öneririz.";
 
 // Who should NOT fast
 export const FASTING_CONTRAINDICATIONS = [
-  "Hamile veya emziren kadınlar",
-  "18 yaş altı bireyler",
-  "Tip 1 diyabet hastaları",
-  "Yeme bozukluğu geçmişi olanlar",
-  "BMI 18.5 altında olanlar",
-  "Aktif enfeksiyonu olanlar",
-  "İnsülin veya kan sulandırıcı kullananlar",
+  "CS2'de aimi olmayanlar (crosshair placement nedir bilmeyenler)",
+  "Kulaksızlar — footstep duyamıyorsan oruç da tutamazsın",
+  "Kolsuzlar — spray transfer yapamayan eli titreyen tipler",
+  "Info vermeyi bilmeyenler — 'bi yerde' diye callout verenler",
+  "Sadece kendi istatistikleri için oynayanlar — baitçiler",
+  "Her round force buy atanlar — ekonomi bilmeyenler",
+  "Öldükten sonra rage quit atanlar — sabırsızlar oruç tutamaz",
+  "Smoke'un içinden peek atanlar — karar verme yetisi sıfır",
+  "Rush B dışında strateji bilmeyenler",
+  "Clutch anında konuşmaya devam edenler — sus da oruç tut",
+  "AWP miss edip 'lag var' diyenler",
+  "Fake flash atmayı bilmeyenler — temel yaşam becerisi",
 ] as const;
 
 // Re-feeding guidance

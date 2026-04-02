@@ -25,12 +25,12 @@ export function DisclaimerModal() {
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
       <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6">
-        <h2 className="text-xl font-bold text-red-400 mb-4">Önemli Uyarı</h2>
+        <h2 className="text-xl font-bold text-red-400 mb-4">Dikkat! Uygunluk Kontrolü</h2>
 
         <p className="text-sm text-slate-300 mb-4">{MEDICAL_DISCLAIMER}</p>
 
         <h3 className="text-sm font-semibold text-slate-200 mb-2">
-          Kimler oruç tutmamalı:
+          Kimler oruç tutMAMALI:
         </h3>
         <ul className="text-sm text-slate-400 space-y-1 mb-6">
           {FASTING_CONTRAINDICATIONS.map((item) => (
@@ -45,7 +45,7 @@ export function DisclaimerModal() {
           onClick={accept}
           className="w-full bg-sky-600 hover:bg-sky-700 active:bg-sky-800 rounded-xl py-3 font-semibold transition-colors"
         >
-          Anladım, Kabul Ediyorum
+          Ben bunlardan değilim, devam
         </button>
       </div>
     </div>

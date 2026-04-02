@@ -68,10 +68,10 @@ export default function SettingsPage() {
 
       {/* Medical info */}
       <section className="bg-slate-900 rounded-2xl p-4">
-        <h2 className="font-semibold mb-3">Tıbbi Uyarı</h2>
+        <h2 className="font-semibold mb-3">Uygunluk Kontrolü</h2>
         <p className="text-sm text-slate-400 mb-3">{MEDICAL_DISCLAIMER}</p>
         <h3 className="text-sm font-medium mb-2 text-slate-300">
-          Kimler oruç tutmamalı:
+          Kimler oruç tutMAMALI:
         </h3>
         <ul className="text-sm text-slate-400 space-y-1">
           {FASTING_CONTRAINDICATIONS.map((item) => (
